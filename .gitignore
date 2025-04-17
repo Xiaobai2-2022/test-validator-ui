@@ -1,0 +1,55 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependency directories
+node_modules/
+
+# Build outputs
+dist/
+dist-ssr/
+out/
+build/
+
+# Vite cache
+.vite/
+
+# Static analysis
+coverage/
+*.tsbuildinfo
+
+# Local env files
+.env
+.env.*.local
+*.local
+
+# Cypress or e2e test output
+cypress/videos/
+cypress/screenshots/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Editor settings
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Optional: JetBrains/WebStorm logs
+.idea/
+*.iml
+
+# Optional: ESLint/Prettier cache
+.eslintcache
+.prettiercache
