@@ -46,10 +46,13 @@ Thumbs.db
 *.sln
 *.sw?
 
-# Optional: JetBrains/WebStorm logs
+# JetBrains/WebStorm logs
 .idea/
 *.iml
 
-# Optional: ESLint/Prettier cache
+# VSCode
+.vscode/
+
+# ESLint/Prettier cache
 .eslintcache
 .prettiercache
