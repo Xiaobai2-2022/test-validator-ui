@@ -132,8 +132,10 @@ const onLogin = () => {
         if (valid) {
             AuthController.login(loginForm.value)
                 .then((response: any) => {
-                    localStorage.setItem('access_token', response?.accessToken)
-                    router.push('/app')
+                    if (typeof response?.accessToken === 'string' && response.accessToken.trim() !== '') {
+                        localStorage.setItem('access_token', response.accessToken)
+                        router.push('/app')
+                    }
                 })
                 .catch((error) => {
                     ElMessage.error(error.response?.data || 'Login failed')
@@ -208,8 +210,10 @@ const onRegister = () => {
             }
             AuthController.register(dto)
                 .then((response: any) => {
-                    localStorage.setItem('access_token', response?.accessToken)
-                    router.push('/app')
+                    if (typeof response?.accessToken === 'string' && response.accessToken.trim() !== '') {
+                        localStorage.setItem('access_token', response.accessToken)
+                        router.push('/app')
+                    }
                 })
                 .catch((error: any) => {
                     const message = error.response?.data || 'Registration failed'

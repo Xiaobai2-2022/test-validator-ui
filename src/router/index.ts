@@ -20,23 +20,23 @@ router.beforeEach((to, from, next) => {
     if (to.path === '/app') {
         if(!token) {
             ElMessage.error("Please Login or Register First")
-            next('/usermanager')
+            return next('/usermanager')
         }
-        next()
+        return next()
     } else if(to.path === '/usermanager') {
         if(token) {
             ElMessage.error("You are Already Logged in")
-            next('/app')
+            return next('/app')
         }
-        next()
+        return next()
     } else if(to.path === '/') {
-        next()
+        return next()
     } else {
         ElMessage.error("Unauthorized Access")
         if(token) {
-            next('/app')
+            return next('/app')
         } else {
-            next('/usermanager')
+            return next('/usermanager')
         }
     }
 })
