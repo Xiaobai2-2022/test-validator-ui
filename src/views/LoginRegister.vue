@@ -134,7 +134,8 @@ const onLogin = () => {
                 .then((response: any) => {
                     if (typeof response?.accessToken === 'string' && response.accessToken.trim() !== '') {
                         localStorage.setItem('access_token', response.accessToken)
-                        router.push('/app')
+                        localStorage.setItem('user', JSON.stringify(response.user))
+                        router.push('/coursepage')
                     }
                 })
                 .catch((error) => {
@@ -212,7 +213,7 @@ const onRegister = () => {
                 .then((response: any) => {
                     if (typeof response?.accessToken === 'string' && response.accessToken.trim() !== '') {
                         localStorage.setItem('access_token', response.accessToken)
-                        router.push('/app')
+                        router.push('/coursepage')
                     }
                 })
                 .catch((error: any) => {
