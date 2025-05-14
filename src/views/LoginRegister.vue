@@ -328,4 +328,8 @@ onMounted(() => {
     align-items: center;
     justify-content: center;
 }
+
+::v-deep(.el-form-item__label) {
+    white-space: nowrap;
+}
 </style>
