@@ -181,6 +181,7 @@ const logout = async () => {
         console.log(err)
     } finally {
         localStorage.removeItem('access_token')
+        localStorage.removeItem('user')
         router.push('/')
     }
 }
