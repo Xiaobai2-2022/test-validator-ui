@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { LoginDTO, RegisterDTO } from '@/models/User.ts';
+import type { LoginDTO, RegisterDTO } from '@/models/user.ts';
 
 const authUrl = '/fxedu/api/auth'
 

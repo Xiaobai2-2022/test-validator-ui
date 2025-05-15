@@ -107,8 +107,8 @@ import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import type { FormInstance, FormRules } from 'element-plus'
 import { View, Hide } from '@element-plus/icons-vue'
-import { AuthController } from '@/controllers/AuthController'
-import type { LoginDTO, RegisterDTO, RegisterFrontEndDTO } from '@/models/User'
+import { AuthController } from '@/controllers/authController.ts'
+import type { LoginDTO, RegisterDTO, RegisterFrontEndDTO } from '@/models/user.ts'
 import axios from 'axios'
 
 const router = useRouter()
@@ -226,7 +226,6 @@ const onRegister = () => {
     })
 }
 
-// Verification Code Timer
 const codeSent = ref(false)
 const resendTimer = ref(0)
 let countdownTimer: number | null = null

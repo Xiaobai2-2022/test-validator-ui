@@ -1,6 +1,6 @@
 import { ElMessage } from 'element-plus'
-import { login, register } from '@/api/Auth.ts'
-import type { LoginDTO, RegisterDTO } from '@/models/User.ts'
+import { login, register } from '@/api/auth.ts'
+import type { LoginDTO, RegisterDTO } from '@/models/user.ts'
 
 export const AuthController = {
 

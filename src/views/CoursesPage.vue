@@ -90,6 +90,9 @@ import { ref, computed, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
+import { useAuth } from '@/composables/useAuth.ts'
+
+const { tryRefreshToken, getAuthHeaders } = useAuth()
 
 const router = useRouter()
 
@@ -128,18 +131,35 @@ const canEdit = computed(() => role.value === 'teacher' || role.value === 'admin
 
 const fetchCourses = async (page = 1) => {
     try {
-        const res = await axios.get('/fxedu/api/courses/page', {
-            params: { page, size: pageSize },
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('access_token')}`
+        await fetchCoursesWithToken(page)
+    } catch (error) {
+
+        if(error.response?.status === 403) {
+            const refreshed = await tryRefreshToken()
+            if(refreshed) {
+                try {
+                    await fetchCoursesWithToken(page)
+                } catch (err) {
+                    ElMessage.error('Failed to load courses')
+                }
+            } else {
+                ElMessage.error('Session expired. Please log in again.')
+                await logout()
             }
-        })
-        courses.value = res.data.records
-        totalCourses.value = res.data.total
-        currentPage.value = page
-    } catch (err) {
-        ElMessage.error('Failed to load courses')
+        } else {
+            ElMessage.error('Failed to load courses')
+        }
     }
+}
+
+const fetchCoursesWithToken = async (page: number) => {
+    const res = await axios.get('/fxedu/api/courses/page', {
+        params: { page, size: pageSize },
+        headers: getAuthHeaders()
+    })
+    courses.value = res.data.records
+    totalCourses.value = res.data.total
+    currentPage.value = page
 }
 
 onMounted(() => {
@@ -182,7 +202,7 @@ const logout = async () => {
     } finally {
         localStorage.removeItem('access_token')
         localStorage.removeItem('user')
-        router.push('/')
+        await router.push('/')
     }
 }
 </script>
