@@ -213,6 +213,7 @@ const onRegister = () => {
                 .then((response: any) => {
                     if (typeof response?.accessToken === 'string' && response.accessToken.trim() !== '') {
                         localStorage.setItem('access_token', response.accessToken)
+                        localStorage.setItem('user', JSON.stringify(response.user))
                         router.push('/coursepage')
                     }
                 })
